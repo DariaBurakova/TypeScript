@@ -1,0 +1,8 @@
+export class Dates {
+    constructor(day, month, year) {
+        this.day = day;
+        this.month = month;
+        this.year = year;
+    }
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGF0ZS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy9kYXRlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQU0sT0FBTyxLQUFLO0lBSWhCLFlBQVksR0FBVSxFQUFDLEtBQVksRUFBQyxJQUFXO1FBQzdDLElBQUksQ0FBQyxHQUFHLEdBQUMsR0FBRyxDQUFBO1FBQ1osSUFBSSxDQUFDLEtBQUssR0FBQyxLQUFLLENBQUE7UUFDaEIsSUFBSSxDQUFDLElBQUksR0FBQyxJQUFJLENBQUE7SUFDaEIsQ0FBQztDQUNGIiwic291cmNlc0NvbnRlbnQiOlsiZXhwb3J0IGNsYXNzIERhdGVze1xuICBkYXk6bnVtYmVyXG4gIG1vbnRoOm51bWJlclxuICB5ZWFyOm51bWJlclxuICBjb25zdHJ1Y3RvcihkYXk6bnVtYmVyLG1vbnRoOm51bWJlcix5ZWFyOm51bWJlcikge1xuICAgIHRoaXMuZGF5PWRheVxuICAgIHRoaXMubW9udGg9bW9udGhcbiAgICB0aGlzLnllYXI9eWVhclxuICB9XG59XG5cbiJdfQ==
