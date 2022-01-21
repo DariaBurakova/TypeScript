@@ -1,34 +1,35 @@
 import { renderBlock } from './lib.js'
-import {Dates} from './date.js'
+import {newDate,lastDay,formatDate} from './date.js'
+import { SearchFormData, search } from './interface.js';
 
-export function renderSearchFormBlock(startDate:{year:number,month:number,day:number}, endDate:{year:number,month:number,day:number}){
-  let now:Date=new Date()//получаем нынешнюю дату
-  let day=now.getDate()//берем день
-  let month=now.getMonth()+1//месяц ,увеличиваем на 1,так как январь 0
-  let year=now.getFullYear()//берем год
-  let lastDayOfMonth = new Date(now.getFullYear(), month+1, 0);//находим последний день следующего месяца
-  let lastMonth=lastDayOfMonth.getMonth()+1//следующий месяц
-  let lastDay=lastDayOfMonth.getDate()//последний день
-  let dateMin:Dates={year:year,month:month,day:day}
-  let dateMax:Dates={year:year,month:lastMonth,day:lastDay}
-  let dateMinString:string=`${year}-${month}-${day}`// чтобы сравнить даты меняем тип на строки
-  let dateMaxString:string=`${year}-${lastMonth}-${lastDay}`
-  let startDateString:string=`${startDate.year}-${startDate.month}-${startDate.day}`
-  let endDateString:string=`${endDate.year}-${endDate.month}-${endDate.day}`
-  let arrivalDate:Dates
- let  departureDate:Dates
-  let arrivalDateString:string
-  let departureDateString:string
-  if(startDateString>=dateMinString && endDateString<=dateMaxString){
-    arrivalDate={year:year,month:month,day:day+1}//к текущей дате добавляем 1 день
-    arrivalDateString=`${arrivalDate.year}-${arrivalDate.month}-${arrivalDate.day}`//приводим ее к строке
-    departureDate={year:arrivalDate.year,month:arrivalDate.month,day:arrivalDate.day+2}//выезд +2 дня от даты вьезда
-    departureDateString=`${departureDate.year}-${departureDate.month}-${departureDate.day}`
+export type namesType = 'checkin' | 'checkout' | 'price'
+
+
+export function renderSearchFormBlock(startDate?:Date, endDate?:Date):void{
+  let now=formatDate(new Date())
+  startDate = startDate || newDate(new Date(), 1)
+  let startDateNew=formatDate(startDate)
+  let endDateNew=formatDate(endDate || newDate(startDate, 2));
+  let lastDayofMonth=formatDate(lastDay(new Date()))
+  
+  const info={
+    start:startDateNew,
+    end:endDateNew,
+    price:0
   }
+  const form=document.querySelector('.form')
+ function handleForm(event:Event,info:SearchFormData){
+  event.preventDefault()
+
+if(event.target){
+  search(info)
+}
+  } 
+
   renderBlock(
     'search-form-block',
     `
-    <form>
+    <form class='form'>
       <fieldset class="search-filedset">
         <div class="row">
           <div>
@@ -44,22 +45,24 @@ export function renderSearchFormBlock(startDate:{year:number,month:number,day:nu
         <div class="row">
           <div>
             <label for="check-in-date">Дата заезда</label>
-            <input id="check-in-date" type="date" value=${arrivalDateString} min=${dateMinString} max=${dateMaxString} name="checkin" />
+            <input id="check-in-date" type="date" value=${startDateNew} min=${now} max=${lastDayofMonth} name="checkin" />
           </div>
           <div>
             <label for="check-out-date">Дата выезда</label>
-            <input id="check-out-date" type="date" value=${departureDateString} min=${dateMinString} max=${dateMaxString} name="checkout" />
+            <input id="check-out-date" type="date" value=${endDateNew} min=${startDateNew} max=${lastDayofMonth} name="checkout" />
           </div>
           <div>
             <label for="max-price">Макс. цена суток</label>
             <input id="max-price" type="text" value="" name="price" class="max-price" />
           </div>
           <div>
-            <div><button>Найти</button></div>
+            <div><button class="button">Найти</button></div>
           </div>
         </div>
       </fieldset>
     </form>
     `
   )
+ 
+  form.addEventListener('submit',(event)=>handleForm(event,info))//пишет что addEventListener null,не понимаю почему так
 }
