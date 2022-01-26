@@ -1,8 +1,8 @@
 export interface SearchFormData{
   start:string
   end:string
-  price?:number
+  price?:string
 }
-export const search=(item:SearchFormData)=>{
-  console.log(item)
+export const search=(formData:SearchFormData):void=>{
+  console.log(formData)
 }

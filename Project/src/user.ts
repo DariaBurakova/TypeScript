@@ -1,14 +1,11 @@
 import { renderBlock } from './lib.js'
 import {Users} from './userCollection.js'
 import {users} from './userCollection.js'
-import {getFavoritesAmount, getUserData} from "./localstor.js";
 
 export function renderUserBlock (name:string,url:string,favoriteItemsAmount?:number) {
  const us=users.find((user:Users)=>{
    return( user.name===name && user.url===url && user.favoriteItemsAmount===favoriteItemsAmount)
- })
-  getUserData(us)
-  getFavoritesAmount(us)
+ }) 
  const favoritesCaption = us.favoriteItemsAmount<1 || us.favoriteItemsAmount==null ? 'ничего нет':us.favoriteItemsAmount
   const hasFavoriteItems = us.favoriteItemsAmount ? true : false
   renderBlock(

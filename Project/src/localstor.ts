@@ -1,14 +1,15 @@
-
-export const getUserData=(item)=>{
-  localStorage.setItem('user',JSON.stringify(item.name))
-  localStorage.setItem('url',JSON.stringify(item.url))
-  const person=localStorage.getItem('user')
-  const address=localStorage.getItem('url')
-  const user=JSON.parse(person)
-  const url=JSON.parse(address)
+import { Users } from "./userCollection";
+export const getUserData=()=>{
+  const user: unknown = JSON.parse(window.localStorage.getItem('user'));
+    Object.setPrototypeOf(user, Users.prototype);
+  const url:unknown=JSON.parse(window.localStorage.getItem('url'))
+  Object.setPrototypeOf(user, Users.prototype);
+    if (user && url instanceof Users) {
+      return `${user},${url}`;
+    } else {
+      throw new Error('error');
+    }
 }
-export const getFavoritesAmount=(item)=>{
-  localStorage.setItem('favorite',JSON.stringify(item.favoriteItemsAmount))
-  const number=localStorage.getItem('favorite')
-  const favoriteItemsAmount=JSON.parse(number)
+export function getFavoritesAmount(){
+  return +window.localStorage.getItem('favoritesAmount')
 }

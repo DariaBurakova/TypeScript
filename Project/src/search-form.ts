@@ -2,7 +2,7 @@ import { renderBlock } from './lib.js'
 import {newDate,lastDay,formatDate} from './date.js'
 import { SearchFormData, search } from './interface.js';
 
-export type namesType = 'checkin' | 'checkout' | 'price'
+export type infoType = 'start' | 'end' | 'price'
 
 
 export function renderSearchFormBlock(startDate?:Date, endDate?:Date):void{
@@ -12,18 +12,19 @@ export function renderSearchFormBlock(startDate?:Date, endDate?:Date):void{
   let endDateNew=formatDate(endDate || newDate(startDate, 2));
   let lastDayofMonth=formatDate(lastDay(new Date()))
   
-  const info={
-    start:startDateNew,
-    end:endDateNew,
-    price:0
-  }
-  const form=document.querySelector('.form')
- function handleForm(event:Event,info:SearchFormData){
+  
+ function handleForm(event:Event,infoList:infoType[]){
   event.preventDefault()
 
 if(event.target){
-  search(info)
+  const formData = new FormData(event.target as HTMLFormElement)
+  const formDataEntries:SearchFormData = {};
+  infoList.forEach(key=>{
+    formDataEntries[key]=<infoType>formData.get(key)
+  })
+  search(formDataEntries)
 }
+
   } 
 
   renderBlock(
@@ -63,6 +64,9 @@ if(event.target){
     </form>
     `
   )
- 
-  form.addEventListener('submit',(event)=>handleForm(event,info))//пишет что addEventListener null,не понимаю почему так
+  const form=document.querySelector('.form')
+ if(form){
+   const info:infoType[]=['start','end','price']
+  form.addEventListener('submit',(event)=>handleForm(event,info)) }
+
 }
