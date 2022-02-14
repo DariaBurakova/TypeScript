@@ -1,6 +1,7 @@
 declare abstract class MyGraphicsPrimitive2D {
     leftPoint: number;
     rightPoint: number;
+    constructor(leftPoint: number, rightPoint: number);
     abstract description(): number;
 }
 declare abstract class MyAreaPrimitive2D extends MyGraphicsPrimitive2D {
@@ -14,8 +15,6 @@ declare class MyCirle extends MyAreaPrimitive2D {
     square(): number;
 }
 declare class MyRectangle extends MyAreaPrimitive2D {
-    leftPoint: number;
-    rightPoint: number;
     width: number;
     height: number;
     constructor(width: number, height: number, leftPoint: number, rightPoint: number);

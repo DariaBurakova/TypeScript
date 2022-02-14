@@ -2,11 +2,17 @@ import { renderBlock } from './lib.js'
 import {Users} from './userCollection.js'
 import {users} from './userCollection.js'
 
-export function renderUserBlock (name:string,url:string,favoriteItemsAmount?:number) {
- const us=users.find((user:Users)=>{
+
+
+
+
+
+
+export function renderUserBlock (name:string,url:string,favoriteItemsAmount?:number){
+ const us:Users=users.find((user:Users)=>{
    return( user.name===name && user.url===url && user.favoriteItemsAmount===favoriteItemsAmount)
  }) 
- const favoritesCaption = us.favoriteItemsAmount<1 || us.favoriteItemsAmount==null ? 'ничего нет':us.favoriteItemsAmount
+ const favoritesCaption = us.favoriteItemsAmount==null ? 'ничего нет':us.favoriteItemsAmount
   const hasFavoriteItems = us.favoriteItemsAmount ? true : false
   renderBlock(
     'user-block',

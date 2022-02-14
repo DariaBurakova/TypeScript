@@ -1,4 +1,4 @@
-export declare function renderBlock(elementId: any, html: any): void;
+export declare function renderBlock(elementId: string, html: string): void;
 export declare function renderToast(message: {
     text: string;
     type: string;

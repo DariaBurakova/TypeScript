@@ -10,7 +10,7 @@ export class FlatRentSdk {
      * @param {string} id Flat ID.
      * @returns {Promise<Object|null>} Flat.
      */
-    get(id: string): Promise<any | null>;
+    get(id: string): Promise<Object | null>;
     /**
      * Search for flats.
      *
@@ -25,8 +25,8 @@ export class FlatRentSdk {
         city: string;
         checkInDate: Date;
         checkOutDate: Date;
-        priceLimit?: number;
-    }): any[];
+        priceLimit?: number | undefined;
+    }): Object[];
     /**
      * Book flat.
      *

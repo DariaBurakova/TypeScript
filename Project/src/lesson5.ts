@@ -1,6 +1,11 @@
 abstract class MyGraphicsPrimitive2D {  
     leftPoint:number
     rightPoint:number
+    constructor( leftPoint:number,
+        rightPoint:number){
+            this.leftPoint=leftPoint
+            this.rightPoint=rightPoint
+        }
    abstract description():number
 }
 
@@ -12,7 +17,7 @@ class MyCirle extends MyAreaPrimitive2D{
     private center:number=3.14
     radius:number=0
     constructor(center:number,radius:number,leftPoint:number,rightPoint:number){
-        super()
+        super(leftPoint,rightPoint)
         this.center=center
         this.radius=radius
     }
@@ -24,12 +29,10 @@ class MyCirle extends MyAreaPrimitive2D{
     }
 }
 class  MyRectangle extends MyAreaPrimitive2D {
-    leftPoint: number
-    rightPoint: number
     width:number=0
     height:number=0
     constructor(width:number,height:number,leftPoint:number,rightPoint:number){
-        super()
+        super(leftPoint,rightPoint)
         this.width=width
         this.height=height
     }

@@ -1,7 +1,7 @@
 export class Users{
   name:string
-  url:string
-  favoriteItemsAmount:number
+  url:string|null
+  favoriteItemsAmount?:number|null
   constructor(name:string,url:string,favoriteItemsAmount?:number) {
     this.name=name,
     this.url=url,

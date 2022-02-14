@@ -3,7 +3,8 @@
 export interface List{
     title:string,
     completed:boolean
-    
+    [key:number]:number|any
+
 }
  export function getTodosByCount(count:number){
     
@@ -15,7 +16,7 @@ export interface List{
               })
             .then((data)=>{
                for( let i=0;i<count;++i){
-                 console.log(data[i].title,data[i].completed)  
+                 console.log(data[i].title,data[i].completed)
                } 
                 })
             .catch((error) => {

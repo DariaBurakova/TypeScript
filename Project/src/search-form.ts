@@ -18,7 +18,10 @@ export function renderSearchFormBlock(startDate?:Date, endDate?:Date):void{
 
 if(event.target){
   const formData = new FormData(event.target as HTMLFormElement)
-  const formDataEntries:SearchFormData = {};
+  const formDataEntries:SearchFormData = {
+    start: '',
+    end: ''
+  };
   infoList.forEach(key=>{
     formDataEntries[key]=<infoType>formData.get(key)
   })
